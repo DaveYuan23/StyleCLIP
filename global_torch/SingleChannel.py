@@ -52,12 +52,27 @@ if __name__ == "__main__":
     args = parser.parse_args()
     dataset_name=args.dataset_name
     '''
+    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser.add_argument('--dataset_name',type=str,default='cat',
+                    help='name of dataset, for example, ffhq')
+    parser.add_argument('--network_pkl', type=str, 
+                    help='Path to the network pickle file', 
+                    required=True)  
+    parser.add_argument('--file_path', type=str, 
+                    help='Path to save the output', 
+                    required=True)  
+
+    args = parser.parse_args()
+    dataset_name=args.dataset_name
+
+    network_pkl = args.network_pkl
+    file_path = args.file_path
     #%%
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model, preprocess = clip.load("ViT-B/32", device=device,jit=False)
     #%%
     
-    network_pkl='/cs/labs/danix/wuzongze/Gan_Manipulation/stylegan2/model/stylegan2-human-config-f.pkl'
+    #network_pkl='/cs/labs/danix/wuzongze/Gan_Manipulation/stylegan2/model/stylegan2-human-config-f.pkl'
     device = torch.device('cuda')
     M=Manipulator()
     M.device=device
@@ -106,7 +121,7 @@ if __name__ == "__main__":
     
     #%%
     # file_path='./npy/'+M.dataset_name+'/'
-    file_path='/cs/labs/danix/wuzongze/Gan_Manipulation/stylegan2/results/npy/human/'
+    #file_path='/cs/labs/danix/wuzongze/Gan_Manipulation/stylegan2/results/npy/human/'
     np.save(file_path+'fs3',fs3)
     
     
