@@ -106,7 +106,7 @@ if __name__ == "__main__":
     for lindex in tqdm.tqdm(mindexs2): #ignore ToRGB layers
         print(lindex)
         num_c=M.dlatents[lindex].shape[1]
-        for cindex in range(num_c):
+        for cindex in tqdm.tqdm(range(num_c)):
             
             M.dlatents=copy.copy(dlatents_o)
             M.dlatents[lindex][:,cindex]=M.code_mean[lindex][cindex]
