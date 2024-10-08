@@ -8,6 +8,7 @@ from PIL import Image
 import copy
 from manipulate import Manipulator
 import argparse
+import tqdm
 
 import sys 
 sys.path.append('/cs/labs/danix/wuzongze/Tansformer_Manipulation/CLIP/')
@@ -102,7 +103,7 @@ if __name__ == "__main__":
     M.num_images=num_images
     select=np.array(M.mindexs)<=16 #below or equal to 128 resolution 
     mindexs2=np.array(M.mindexs)[select]
-    for lindex in mindexs2: #ignore ToRGB layers
+    for lindex in tqdm.tqdm(mindexs2): #ignore ToRGB layers
         print(lindex)
         num_c=M.dlatents[lindex].shape[1]
         for cindex in range(num_c):
