@@ -3,6 +3,7 @@
 
 import numpy as np 
 import torch
+import os
 
 from PIL import Image
 import copy
@@ -53,6 +54,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     dataset_name=args.dataset_name
     '''
+    print(os.listdir('./npy/'))
     parser = argparse.ArgumentParser(description='Process some integers.')
     parser.add_argument('--dataset_name',type=str,default='cat',
                     help='name of dataset, for example, ffhq')
