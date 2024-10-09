@@ -70,6 +70,8 @@ if __name__ == "__main__":
 
     network_pkl = args.network_pkl
     file_path = args.file_path
+    test_array = np.array([1,2,3])
+    np.save(file_path+'test',test_array)
     #%%
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model, preprocess = clip.load("ViT-B/32", device=device,jit=False)
