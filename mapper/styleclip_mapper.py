@@ -2,6 +2,7 @@ import torch
 from torch import nn
 from mapper import latent_mappers
 from models.stylegan2.model import Generator
+import pickle
 
 
 def get_keys(d, name):
@@ -42,10 +43,10 @@ class StyleCLIPMapper(nn.Module):
 			self.decoder.load_state_dict(get_keys(ckpt, 'decoder'), strict=True)
 		else:
 			print('Loading decoder weights from pretrained!')
-			with open(self.opts.stylegan_weights):
-				self.decoder = pickle.load(f)['G_ema']
-			#ckpt = torch.load(self.opts.stylegan_weights)
-			#self.decoder.load_state_dict(ckpt['g_ema'], strict=False)
+			# with open(self.opts.stylegan_weights):
+			# 	self.decoder = pickle.load(f)['G_ema']
+			ckpt = torch.load(self.opts.stylegan_weights)
+			self.decoder.load_state_dict(ckpt['g_ema'], strict=False)
 
 	def forward(self, x, resize=True, latent_mask=None, input_code=False, randomize_noise=True,
 	            inject_latent=None, return_latents=False, alpha=None):
